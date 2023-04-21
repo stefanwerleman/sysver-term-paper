@@ -1,5 +1,28 @@
 # SyseVR Term Paper
 
+LaTeX project for the final report.
+
+# Requirements
+
+Make sure VS Code is installed: https://code.visualstudio.com
+
+# Installation
+
+Install the **LaTeX Workshop** vscode extension by James Yu.
+
+Install texlive:
+
+```bash
+sudo apt install texlive -y
+sudo apt install latexmk -y
+```
+
+Add texlive to PATH:
+
+```bash
+export PATH=$PATH:/usr/local/texlive/2023/bin/x86_64-linux
+```
+
 This is the LaTeX template for IEEE/CVF CVPR 2023 submissions, rebuttals, and final versions.
 
 The last version of the CVPR/ICCV LaTeX template had been developed by Paolo.Ienne@di.epfl.ch and awf@acm.org about 15 years ago. That version suffered from several issues:
