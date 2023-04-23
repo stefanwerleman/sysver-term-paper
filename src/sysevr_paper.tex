@@ -14,6 +14,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
+\usepackage[none]{hyphenat}
+\usepackage{array}
 
 
 % It is strongly recommended to use hyperref, especially for the review version.
@@ -44,14 +46,20 @@
 
 \begin{document}
 
-%%%%%%%%% TITLE - PLEASE UPDATE
+% <><><><><><><><><><><><><><><><><><><>
+%               TITLE
+% <><><><><><><><><><><><><><><><><><><>
 \title{SySeVR: A Framework and Pathway for Using Deep Learning to Detect Software Vulnerabilities}
 
+
+% <><><><><><><><><><><><><><><><><><><>
+%              AUTHORS
+% <><><><><><><><><><><><><><><><><><><>
 \author{
     Carter Yanac\\
     University of Central Florida\\
     4000 Central Florida Blvd, Orlando, FL 32816\\
-    {\tt\small yanac7562@knight.ucf.edu}
+    {\tt\small yanac7562@knights.ucf.edu}
     \and
     Stefan Werleman\\
     University of Central Florida\\
@@ -61,20 +69,98 @@
 \maketitle
 
 % <><><><><><><><><><><><><><><><><><><>
-%               ABSTRACT
+%           ABSTRACT - Stefan
 % <><><><><><><><><><><><><><><><><><><>
 \begin{abstract}
+    Deep learning has been a catalyst for the latest breakthroughs in technological history. It has been 
+    used in computer vision, finance, social media, and more. However, the latest development in deep 
+    learning has not been under any of these categories. Researchers have developement deep learning 
+    frameworks in the cybersecurity sector. More specifically there have been recent developments for 
+    for analyzing software vulnerabilities as a primary aid for software engineers that work with sensitive 
+    data and systems. This work paper covers a special type of deep learning framework called SySeVR which is 
+    detects software vulnerabities in C/C++ code implementation. We are not only going to cover this framework, 
+    in detail but we are also going to cover other existing related frameworks and how it enabled more 
+    developments in deep learning such as deep representation learning, VulDeBERT, VulDeePecker, and SAVIOR.
 \end{abstract}
 
 % <><><><><><><><><><><><><><><><><><><>
-%            INTRODUCTION
+%         INTRODUCTION - Stefan
 % <><><><><><><><><><><><><><><><><><><>
 \section{Introduction}
 \label{sec:intro}
 
-\section{Conclusion}
+\cite{Lin20}
 
-%%%%%%%%% REFERENCES
+% <><><><><><><><><><><><><><><><><><><>
+%         DEEP LEARNING - Stefan
+% <><><><><><><><><><><><><><><><><><><>
+\section{Deep Learning}
+\label{sec:deep-learning}
+
+\subsection{Recurrent Neural Network}
+\label{sub:recurrent-neural-network}
+
+\subsection{Convolutional Neural Network}
+\label{sub:convolutional-neural-network}
+
+\subsection{Deep Belief Network}
+\label{sub:deep-belief-network}
+
+% <><><><><><><><><><><><><><><><><><><>
+%          SYSEVR FRAMEWORK
+% <><><><><><><><><><><><><><><><><><><>
+\section{SySeVR Framework}
+\label{sec:sysevr-framework}
+
+\cite{Li22}
+
+% <><><><><><><><><><><><><><><><><><><>
+%         ADDITIONAL FRAMEWORKS
+% <><><><><><><><><><><><><><><><><><><>
+\section{Additional Frameworks}
+\label{sec:additional-frameworks}
+
+\subsection{Automated Vulnerability Detection Machine Using Deep Representation Learning}
+\label{sub:automated-vulnerability-detection-machine-using-deep-representation-learning}
+
+\cite{Russell18}
+
+\subsection{VulDeBERT: A Vulnerability Detection System Using BERT}
+\label{sub:vuldebert}
+
+\cite{Kim22}
+
+\subsection{SAVIOR: Towards Bug-Driven Hybrid Testing}
+\label{sub:savior}
+
+\cite{Chen20}
+
+\subsection{VulDeePecker: A Deep Learning-Based System for Multiclass Vulnerability Detection}
+\label{sub:vuledeepecker}
+
+\cite{Zou21}
+
+% <><><><><><><><><><><><><><><><><><><>
+%         FUTURE WORK - Carter
+% <><><><><><><><><><><><><><><><><><><>
+\section{Future Work}
+\label{sec:future-work}
+
+\subsection{Working with Version Control}
+\label{sub:working-with-version-control}
+
+\subsection{Integrating with CI/CD Pipelines}
+\label{sub:integrating-with-cicd-pipelines}
+
+% <><><><><><><><><><><><><><><><><><><>
+%          CONCLUSION - Carter
+% <><><><><><><><><><><><><><><><><><><>
+\section{Conclusion}
+\label{sec:conclusion}
+
+% <><><><><><><><><><><><><><><><><><><>
+%            REFERENCES
+% <><><><><><><><><><><><><><><><><><><>
 {\small
 \bibliographystyle{ieee_fullname}
 \bibliography{egbib}
