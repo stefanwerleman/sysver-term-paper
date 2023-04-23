@@ -58,12 +58,12 @@
 \author{
     Carter Yanac\\
     University of Central Florida\\
-    4000 Central Florida Blvd, Orlando, FL 32816\\
+    Orlando, FL\\
     {\tt\small yanac7562@knights.ucf.edu}
     \and
     Stefan Werleman\\
     University of Central Florida\\
-    4000 Central Florida Blvd, Orlando, FL 32816\\
+    Orlando, FL\\
     {\tt\small stefanwerleman@knights.ucf.edu}
 }
 \maketitle
@@ -181,9 +181,18 @@ persist from one timestep to the next which gives the NN a "Recurrent" nature.
 This network is mostly used for natural language processing or data that has a sequential order to it which 
 makes an appropriate candidate for learning and detecting software vulnerabilities. 
 
-\subsection{Convolutional Neural Network}
+\subsection{Convolutional Neural Network (CNN)}
 \label{sub:convolutional-neural-network}
 
+A Convolutional Neural Network (CNN) is a type of NN that uses convolutional and pooling layers to only 
+extract the important parts of a data-point (Figure \ref{fig:dl-2}). The convolutional layers of a CNN outputs a feature map which 
+represents important features of the given datum and those feature maps are downsampled with a pooling layer. 
+This pooling layer normally comes after a convolutional layer and reduces the complexity of the feature maps. 
+Next, the downsampled feature map gets passed to an activation function and then through the output layer of the 
+network which would return a vector that represents the final classifications of the given data-point. This final 
+vector contains class units each of which are probabilities between 0 and 1. Essentially, one class unit means 
+one prediction or classification, two represents two classifications, and so on \cite{Lin20}. There is no 
+limit to how many convolutional or pooling layers a CNN can have.
 
 \begin{figure}[h]
     \centering
@@ -193,9 +202,68 @@ makes an appropriate candidate for learning and detecting software vulnerabiliti
     \label{fig:dl-2}
 \end{figure}
 
+CNNs are primarily used for computer vision tasks such as classification, object detection, and more. 
+The most important and relevant attribute for this topic is that CNNs can represent data in the form of 
+matrices and properly segment regions of the data (Figure \ref{fig:dl-3}). This is especially useful for when a model needs to segment 
+specific blocks of code that are vulnerable to exploits. 
 
-\subsection{Deep Belief Network}
+\begin{figure}[h]    
+    \centering
+    \fbox{
+    \begin{tabular}{cc}
+        \includegraphics[width=0.26\textwidth]{images/deep_learning/cnn_1.png}
+        \includegraphics[width=0.13\textwidth]{images/deep_learning/cnn_2.png}
+    \end{tabular}
+    }
+    \caption{Example of image segmentation. A neural network would first segment certain identifiable 
+    objects in the picture and then only highlight object of interest \cite{Li22}.}    
+    \label{fig:dl-3}
+\end{figure}
+
+\subsection{Deep Belief Network (DBN)}
 \label{sub:deep-belief-network}
+
+A Deep Belief Network (DBN) is an NN that contains multiple hidden layers of generative models called 
+a Restricted Boltzmann Machine (RBM) (Figure \ref{fig:dl-4}). Each RBM in a layer is trainined separately 
+from the rest of the layers where the output of each RBM layer is used as input for the next RBM layer until 
+it reaches the final output layer of the network.
+
+A Restricted Boltzmann Machine in paticular is a generative model that learns a probability distribution 
+of the given input data - this is called a Joint Probability Distribution \cite{Feller57}. Although Figure 
+\ref{fig:dl-4} demonstrates that an RBM is a layer, it actually as two addition underlying layers: the 
+\textbf{visible} and \textbf{hidden} units. So since the network in Figure \ref{fig:dl-4} has three RBM layers, the 
+entire network actually has six additional layers. In the visible layer, the network computes the number 
+of visible units, \emph{m}, over the number of hidden units, \emph{n}. Where \emph{v} is the total 
+visible units and \emph{h} is the total hidden units (Equation \ref{eq:rbm-0}).
+
+\begin{equation}
+\label{eq:rbm-0}
+    P(v|h)=\Pi_{i-1}^{m}P(v_{i}|h)
+\end{equation}
+
+Conversely, in the hidden layer, the network computes the number of hidden units over the number of 
+visible units (Equation \ref{eq:rbm-1}).
+
+\begin{equation}
+\label{eq:rbm-1}
+    P(h|v)=\Pi_{j-1}^{n}P(h_{j}|v)
+\end{equation}
+
+These individual probabilies are then passed through a logistic sigmoid activation function as the final 
+output of an RBM layer.
+
+\begin{figure}[h]
+    \centering
+    \fbox{\includegraphics[width=0.47\textwidth]{images/deep_learning/dbn_0.png}}
+
+    \caption{Architecture of a Deep Belief Network \cite{Lin20}.}
+    \label{fig:dl-4}
+\end{figure}
+
+Data used for networks can be complex in terms of dimensionality, i.e., the datasets that contain software 
+vulnerabilities are considered high-dimensional which can slow the performance of a network during training. 
+This is a very important unsupervised learning characteristic that makes the DBN an advantageous network 
+for this particular problem \cite{Lin20}.
 
 % <><><><><><><><><><><><><><><><><><><>
 %          SYSEVR FRAMEWORK - Carter
