@@ -295,6 +295,63 @@ created to analyze many different programming languages and software for vulnera
 we are going to provide some insight on some of those frameworks that continue to aid companies and cybersecurity engineers 
 when developing software.
 
+
+\begin{figure*}[h!]
+    \centering
+    \fbox{\includegraphics[width=1.0\textwidth]{images/additional_frameworks/vul_dee_pecker_0.png}}
+
+    \caption{Training phase of the VulDeePecker framework \cite{Zou21}.}
+    \label{fig:af-0}
+\end{figure*}
+
+\begin{figure*}[h!]
+    \centering
+    \fbox{\includegraphics[width=1.0\textwidth]{images/additional_frameworks/vul_dee_pecker_1.png}}
+
+    \caption{Detection phase of the VulDeePecker framework \cite{Zou21}.}
+    \label{fig:af-1}
+\end{figure*}
+
+% Stefan
+\subsection{VulDeePecker: A Deep Learning-Based System for Multiclass Vulnerability Detection}
+\label{sub:vuledeepecker}
+
+Some existing frameworks such as SySeVR can only detect the presence of vulnerabilities. However, these 
+frameworks cannot piinpoint the types of vulnerabilities that are present in a given source code. This 
+section introduces a new deep learning framework callled VulDeePecker which is model that is meant for 
+multiclass vulnerability detection \cite{Zou21}.  VulDeePecker stands for Multiclass Vulnerability Deep Pecker.
+Multiclass means multiple class labels in deep learning, i.e., the ability to specify how the object of interest 
+should be labelled.
+
+The authors of this framework did not use any third party databases such as NVD \cite{Nist00,Zou21}. Instead, 
+they created their dataset from scratch and used to train and evaluate their framework. Similar to SySeVR, 
+there are two phases defined for VulDeePecker: training and detection. In both phases, there are three major
+components: parser, vector representation extractor, and detector (Figures \ref{fig:af-0} and \ref{fig:af-1}). 
+Given a sample program, the first component, parser, is responsible for parsing the source code into code gadgets. 
+Code gadgets represents the number of code statements that semantically related \cite{Zou21}. The parser would then 
+label each code gadget and normalize them based on the total number of gadgets found. With the normalize gadgets, 
+the parser would output code attentions which is how we differentiate between each gadget. Along with the attentions,
+the gadgets themselves are provided to the extractor. The vector representation extractor essentially transforms the 
+gadgets and attention into quantifiable vectors for the learning model called the Detector. 
+
+\begin{figure}[h]
+    \centering
+    \fbox{\includegraphics[width=0.5\textwidth]{images/additional_frameworks/vul_dee_pecker_2.png}}
+
+    \caption{Architecture for the BLSTM neural network. \cite{Zou21}.}
+    \label{fig:af-2}
+\end{figure}
+
+The main detector for this is called the Bidirectional Long-Short Time Memory neural network or BLSTM. It 
+is a new type of network that is broken up into three models: feature-fusion, global-feature, and local-feature 
+models (Figure \ref{fig:af-2}). In this final step the network can either train with these inputs or make 
+a final classification. The detection phase is similar to the training phase, but skips step 2 in the parser 
+(Figure \ref{fig:af-1}). 
+
+After training and validation, the VulDeePecker framework was able to achieve false-positive rate of 
+0.02\%, false-negative rate of 5.73\%, and an F1 score of 94.69\%. Despite this new state-in-art scores, 
+the computational cost significantly increased compared to other existing frameworks.
+
 % Carter
 \subsection{Automated Vulnerability Detection Machine Using Deep Representation Learning}
 \label{sub:automated-vulnerability-detection-machine-using-deep-representation-learning}
@@ -307,23 +364,37 @@ when developing software.
 
 \cite{Kim22}
 
-% Stefan
-\subsection{VulDeePecker: A Deep Learning-Based System for Multiclass Vulnerability Detection}
-\label{sub:vuledeepecker}
-
-\cite{Zou21}
-
 % <><><><><><><><><><><><><><><><><><><>
 %         FUTURE WORK - Stefan
 % <><><><><><><><><><><><><><><><><><><>
 \section{Future Work}
 \label{sec:future-work}
 
-\subsection{Working with Version Control}
-\label{sub:working-with-version-control}
+As for future work, these open-source deep learning frameworks can and should be imbedded into existing 
+development practices such as version control and continuous integration/delivery pipelines.
+
+\subsection{Integration with Version Control}
+\label{sub:integrating-with-version-control}
+
+Version control is one of most popular practices in the software industry it allows engineers to keep track 
+of changes and to collaborate with others in the most efficient way possible. 
+
+Existing version control systems such as Git \cite{Torvalds05} and GitHub \cite{Werner08} should start leveraging these vulnerability 
+detection systems to analyze committed code so that it can detect bugs or vulnerabilities as fast as 
+possible. This would help engineers quickly understand their flaw and fix them before it even hits production.
+Thus, minimizing the risk of attackers exploiting those vulnerabilities.
 
 \subsection{Integrating with CI/CD Pipelines}
 \label{sub:integrating-with-cicd-pipelines}
+
+Another late addition to the software development cycle is continuous integration/delivery (CI/CD). 
+CI/CD is an approach that utilizess automation to frequently release audited code changes to production. 
+Whenever code is pushed to the main production branch, it triggers an event that performs integration 
+testing and validation. If it fails testing, then it does not get push to production. Otherwise, it is 
+released. This process is called a pipeline and existing vulernability detection systems should be integrated 
+with this CI/CD pipeline. Pushed software that passes testing can still contain vulneribilities and adding 
+that layer to the pipeline would further prevent these vulnerabilities from getting released where attackers 
+reside.
 
 % <><><><><><><><><><><><><><><><><><><>
 %          CONCLUSION - Carter
