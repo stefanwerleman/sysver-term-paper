@@ -270,7 +270,7 @@ for this particular problem \cite{Lin20}.
 % <><><><><><><><><><><><><><><><><><><>
 \section{SySeVR Framework}
 \label{sec:sysevr-framework}
-
+asdasd
 \cite{Li22}
 
 \subsection{Method}
@@ -281,6 +281,24 @@ for this particular problem \cite{Lin20}.
 
 \subsection{Limitations}
 \label{sub:limitations}
+\subsubsection{Narrow Scope}
+SySeVR is ultimately designed with a narrow scope, that is, to do vulnerability checks on programs written in
+the C or C++ programming language. The dataset of vulnerabilities may be specific to C/C++ issues, thereby requiring
+a potential re-imagining of the SySeVR framework so it can become robust and work with multiple languages.
+\subsubsection{Limited Characteristics}
+The dataset in which SySeVR is trained on to identify vulnerabilities has limited coverage and only focuses on four
+kinds of syntax characteristics, covering ~93.6\% of programs in SARD. This dataset is large enough to prove the usability
+of SySeVR as a framework, but it is not strong enough to prove this framework can identify vulnerabilities in most real-world
+programs. More data will produce a more reliable framework, and this is a focus area for future research.
+\subsubsection{Single Model}
+This is potentially a large limitation, which forces the question of incorporating more models to flesh out future
+vulnerabilities or instead only working with the one. It is quite possible that multiple models will allow more coverage, but
+may be far more complicated.
+\subsubsection{Robustness}
+Given the way SySeVR tests for vulnerabilities, presently it is only possible for the framework to recognize which
+block or lines of code the vulnerability exists in. It will be far more useful and robust if the framework is able to
+determine the specific line of code, given the semantic relationship that line has with its neighbors. Of course, this is
+a focus area for future research.
 
 % <><><><><><><><><><><><><><><><><><><>
 %         ADDITIONAL FRAMEWORKS
@@ -317,7 +335,7 @@ when developing software.
 \label{sub:vuledeepecker}
 
 Some existing frameworks such as SySeVR can only detect the presence of vulnerabilities. However, these 
-frameworks cannot piinpoint the types of vulnerabilities that are present in a given source code. This 
+frameworks cannot pinpoint the types of vulnerabilities that are present in a given source code. This 
 section introduces a new deep learning framework callled VulDeePecker which is model that is meant for 
 multiclass vulnerability detection \cite{Zou21}.  VulDeePecker stands for Multiclass Vulnerability Deep Pecker.
 Multiclass means multiple class labels in deep learning, i.e., the ability to specify how the object of interest 
