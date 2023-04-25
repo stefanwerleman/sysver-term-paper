@@ -17,7 +17,6 @@
 \usepackage[none]{hyphenat}
 \usepackage{array}
 
-
 % It is strongly recommended to use hyperref, especially for the review version.
 % hyperref with option pagebackref eases the reviewers' job.
 % Please disable hyperref *only* if you encounter grave issues, e.g. with the
@@ -29,7 +28,6 @@
 %  should be clear).
 \usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
 
-
 % Support for easy cross-referencing
 \usepackage[capitalize]{cleveref}
 \crefname{section}{Sec.}{Secs.}
@@ -37,12 +35,10 @@
 \Crefname{table}{Table}{Tables}
 \crefname{table}{Tab.}{Tabs.}
 
-
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
 \def\cvprPaperID{*****} % *** Enter the CVPR Paper ID here
 \def\confName{CVPR}
 \def\confYear{2023}
-
 
 \begin{document}
 
@@ -50,7 +46,6 @@
 %               TITLE
 % <><><><><><><><><><><><><><><><><><><>
 \title{SySeVR: A Framework and Larger Pathway for Using Deep Learning to Detect Software Vulnerabilities}
-
 
 % <><><><><><><><><><><><><><><><><><><>
 %              AUTHORS
@@ -96,7 +91,6 @@
     \caption{Overview of the Artificial Intelligence bubble \cite{Oppermann22}.}
     \label{fig:intro-0}
 \end{figure}
-
 
 More and more companies and organizations are relying on software and automation to become successful. 
 Essentially, there is an increasing amount of software that is being pushed to production and this increases 
@@ -145,7 +139,6 @@ used to provide datasets for deep learning models such as SySeVR to train on (Se
 \begin{figure}[t]
     \centering
     \fbox{\includegraphics[width=0.47\textwidth]{images/deep_learning/neural_network_0.png}}
-
     \caption{General architecture of a neural network.}
     \label{fig:dl-0}
 \end{figure}
@@ -265,19 +258,34 @@ vulnerabilities are considered high-dimensional which can slow the performance o
 This is a very important unsupervised learning characteristic that makes the DBN an advantageous network 
 for this particular problem \cite{Lin20}.
 
+
+
+
+
+
 % <><><><><><><><><><><><><><><><><><><>
-%          SYSEVR FRAMEWORK - Carter
+%          SYSEVR FRAMEWORK - Carter \cite{Li22}
 % <><><><><><><><><><><><><><><><><><><>
 \section{SySeVR Framework}
 \label{sec:sysevr-framework}
-asdasd
-\cite{Li22}
+SySeVR is the first systematic framework that uses deep learning to detect vulnerabilities in C/C++ source code. The premise of the framework is representing information as vectors which
+accomodate both the syntax and semantic information necessary for vulnerability detection. SySeVR uses multiple neural networks to detect various vulnerabilties, using Bidirectional RNNs as its backbone because they are more effective than other neural networks.
+In the SySeVR framework, there are the SyVCs and SeVCs components which work together in considering syntax characteristics and semantic information.
+\subsection{Syntax-based Vulnerability Candidates (SyVCs)}
+\subsection{Semantics-based Vulnerability Candidates (SeVCs)}
 
 \subsection{Method}
 \label{sub:method}
 
 \subsection{Results}
 \label{sub:results}
+
+
+
+
+
+
+
 
 \subsection{Limitations}
 \label{sub:limitations}
@@ -312,7 +320,6 @@ much bigger. Ever since the inception of GitHub and open-source software, many n
 created to analyze many different programming languages and software for vulnerabilities. In this section, 
 we are going to provide some insight on some of those frameworks that continue to aid companies and cybersecurity engineers 
 when developing software.
-
 
 \begin{figure*}[h!]
     \centering
@@ -370,17 +377,106 @@ After training and validation, the VulDeePecker framework was able to achieve fa
 0.02\%, false-negative rate of 5.73\%, and an F1 score of 94.69\%. Despite this new state-in-art scores, 
 the computational cost significantly increased compared to other existing frameworks.
 
-% Carter
+% Carter \cite{Russell18}
 \subsection{Automated Vulnerability Detection Machine Using Deep Representation Learning}
 \label{sub:automated-vulnerability-detection-machine-using-deep-representation-learning}
 
-\cite{Russell18}
+\subsubsection{Strength in Data}
+Deep representation learning provides a strong model to detect vulnerabilities using machine learning. Aside from the model
+itself, the strength comes from the collection of data available to train the model with. The researchers combined various
+sources of data to make a dataset composed of millions of functional-level examples of C/C++ code. Data is at the
+functional-level as to keep it the lowest level of granularity while still capturing the flow of subroutines \cite{Russell18}.
 
-% Carter
+Data was sourced from SATE IV (Juliet Test Suite), Debian packages, and public Git repositories to simulate real-world data
+for the machine learning model. There are three separate phases to procuring the data inside this immense dataset.
+
+In phase 1, the researchers created their own C/C++ lexer to capture the relevant meaning of certain tokens, but keeping it
+generic and small in size. The purpose of this is lexer is to standardize the data inside different code bases, empowering a transfer of learning throughout the dataset.
+In phase 2, any duplicated code or code with neglible differences from other samples of code is strictly removed
+In phase 3, open-source analyzers Clang, Cppcheck, and Flawfinder were used to generate labels on vulnerable code and what kind of code
+errors they are.
+Efficient handling of large amounts of data will in turn produce a powerful model capable of using deep representation learning.
+
+\subsubsection{Architecture}
+To create vulnerability detection using Deep Representation Learning, the researchers' approach is to combine
+neural feature representations of the C/C++ source code with an ensemble classifier known as random forest. In creating
+the neural network classifier, the researchers took inspiration from natural language processing. In addition, they take
+inspiration from CNNs and RNNs by leveraging feature-extraction similiar to that of sentence sentiment classification.
+
+There are five total stages in the architecture for deep representation learning. Figure \ref{fig:af-3} demonstrates these
+five stages, starting with an embedding of the lexer tokens, and ending with random forest classification.
+
+[Pretend Figure \ref{fig:af-3} is here.]
+\linebreak
+Tokens produced from the lexer are embedded into a fixed k-dimensional representation based on randomly initialized learned embeddings.
+In the second stage, feature extraction, both convolutional and recurrent feature extraction approaches were used.
+In the third stage, pooling, the results from either convolutional or recurrent features are maxpooled across the sequence length in order to
+keep a fixed-size representation.
+In the fourth stage, dense layers, there exist two layers of classifying, boosting the classification performance.
+In the fifth and final stage, the training data was standardized with similar variables, and any sensitive parameters were tuned using Matthews Correlation Coefficient.
+At this stage, selection of models is based on the highest validation from this coefficient.
+
+This model is designed to be robust and have excellent classification performance. The researchers opted to use the
+neural features from the pooling stage and use them as inputs to an ensemble classifier like random forest, which in turn
+proved to yield very good results. This approach is robust because it allows retraining on new sets of features.
+
+\subsubsection{Results}
+In the end, it is evident that the CNN models performed better than the other models. These CNN models were also the fastest to train
+and do so with fewer parameters. However, the models using the random forest classifer performed slightly better than the models without random forest classification.
+Of the models discussed in this section, CNN + RF performs the best, and further results are tested based on the CNN + RF model.
+
+\begin{figure}[h]
+    \centering
+    \fbox{\includegraphics[width=0.47\textwidth]{images/additional_frameworks/deep_repre_learning_1.png}}
+    \caption{Convolutional feature activation map. \cite{Russell18}.}
+    \label{fig:af-3}
+\end{figure}
+
+% Carter 
 \subsection{VulDeBERT: A Vulnerability Detection System Using BERT}
 \label{sub:vuldebert}
+VulDeBERT is another software vulnerability detection system which uses machine learning to detect issues with C/C++ code gadgets. The system stands for Bidirectional Encoder Representations from Transformers (BERT).
+In full, the name VulDeBERT is a combination of VulDeePecker and BERT. The significance of VulDeePecker in this section is that it is considered the state-of-the-art detection system, which
+VulDeBERT is trying to overcome in terms of detection accuracy \cite{Kim22}. In this section, we will cover three core parts of VulDeBERT, starting with its architecture,
+then moving onto its code gadget generation, and finally evaluating its results and seeing how this system compares with the aforementioned VulDeePecker system.
+\subsection{Architecture of VulDeBERT}
+Similarly to VulDeePecker, VulDeBERT's architecture is made up of two phases; training phase and detection phase.
+In the training phase, once VulDeBERT has generated the code gadgets, it will embed these code gadgets into a BERT input representation so that it can train
+as a BERT model. The BERT model has its parameters fine-tuned and trained to detect target vulnerabilities. The output from this phase
+is sent to a classifer to detect specific vulnerabilities.
 
-\cite{Kim22}
+The second phase, detection phase, is rather similar to the training phase. However, the code gadget generation does not perform until completion. Instead,
+the step in which ambiguous code gadgets are removed does not perform, thereby keeping ambiguous code in the mix of code gadgets.
+A vector is produced, containing the source code's gadgets, and rather any vulnerabilities detected in this phase will report the location inside
+the vector, otherwise classifying the given vector as safe.
+
+\subsubsection{Code Gadget Generation}
+A critical component to VulDeBERT, the researchers for this model developed a new code gadget generation tool to
+make sure the inputs into the model is strictly well-structed and semantically related, and wholely extracted from source code files.
+As their research is specifically interested in system function calls, the idea is to create a code gadget by collecting
+code slices related to a system function call, its caller and its recipient. There are three stages in VulDeBERT's code gadget generation.
+To begin, in phase 1, slices are determined to be related to system function calls in some capacity. In phase 2, these slices are
+converted into code gadgets. In phase 3, any ambiguous or unclear code gadgets are removed for usability and uniformity. 
+Figure \ref{fig:af-4} demonstrates a visualization of this process which may simplify the three phases.
+
+\subsubsection{Evaluating VulDeBERT}
+As mentioned at the start, the idea of VulDeBERT is to replace VulDeePecker as a new state-of-the-art vulnerability detection system. Therefore, the evaluation of the system will be
+tested against VulDeePecker. As VulDeePecker is not publicly available, the researchers working on VulDeBERT conduct evaluations by remaking the classification model that
+VulDeePecker uses, which is the bidirectional LSTM classification model. The recreation of this model shares the same hyperparameters as VulDeePecker.
+
+To account for averages, each evaluation was repeated ten times. The metrics that are to be evaluated are the False Positive Rate, False Negative Rate, True
+Positive Rate, Precision, and an F1 score. Out of the tests performed, it is found that VulDeBERT achieved a mean F1 score of ~94.6\% compared to VulDeePecker, which only achieved a score of ~86.6\%. The detection accuracy of VulDeBERT was generally higher than VulDeePecker's accuracy, making the system a promising competitor
+to VulDeePecker.
+
+% @stefan it may be nice if this could span the whole width and not overlap other figure(s)
+% otherwise it is fine as is
+\begin{figure}[h!]
+    \centering
+    \fbox{\includegraphics[width=0.5\textwidth]{images/additional_frameworks/vul_de_bert_1.png}}
+    \caption{Three phases of Code Gadget generation. \cite{Kim22}.}
+    \label{fig:af-4}
+\end{figure}
+
 
 % <><><><><><><><><><><><><><><><><><><>
 %         FUTURE WORK - Stefan
@@ -419,6 +515,7 @@ reside.
 % <><><><><><><><><><><><><><><><><><><>
 \section{Conclusion}
 \label{sec:conclusion}
+[text goes here.]
 
 % <><><><><><><><><><><><><><><><><><><>
 %            REFERENCES
